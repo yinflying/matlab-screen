@@ -34,16 +34,16 @@ Note: In order to be more convenient, you could make a alias in your ~/.bashrc o
 alias smatlab='screen -S matlab -m sh -c "<MATLAB/bin/glnxa64/MATLAB -nosplash -nodesktop"'
 ```
 2. Open a matlab script file (*.m), and then type following shortcut:
-    1. `<Leader>mr` : (matlab run)execute current matlab script
-    2. `Shift+v jjjj<Leader>mr` : (matlab run)execute current selected line
-    3. `<Leader>md`: (matlab doc)consult the function name under current cursor
-    4. `<Leader>mb`: (matlab break)set a breaking point at current line
-    5. `<Leader>mv`: (matlab variable)show variable under current cursor
-    6. `<Leader>mf`: (matlab open file)open current buffer's file in matlab editor
-    7. `<Leader>maf`: (matlab open all file)open all buffers' file in matlab editor
-    8. `<Leader>mw`: (matlab workspace) open matlab workspace
-    9. `<Leader>mc`: (matlab clear) clear matlab all variables
-    10. `<Leader>ms`:(matlab size) show variable size under current cursor
+    1. `<Leader>mr`           : (matlab run           ) execute current matlab script
+    2. `Shift+v jj<Leader>mr` : (matlab run           ) execute current selected line
+    3. `<Leader>md`           : (matlab doc           ) consult the function name under current cursor
+    4. `<Leader>mb`           : (matlab break         ) set a breaking point at current line
+    5. `<Leader>mv`           : (matlab variable      ) show variable under current cursor
+    6. `<Leader>mf`           : (matlab open file     ) open current buffer's file in matlab editor
+    7. `<Leader>maf`          : (matlab open all file ) open all buffers' file in matlab editor
+    8. `<Leader>mw`           : (matlab workspace     ) open matlab workspace
+    9. `<Leader>mc`           : (matlab clear         ) clear matlab all variables
+    10. `<Leader>ms`          : (matlab size          ) show variable size under current cursor
 
 NOTE 1: `<Leader>` key can be set in `.vimrc` such as:
 ```vimscript
