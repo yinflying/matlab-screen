@@ -3,11 +3,13 @@ vim matlab plugin pass specified commands through gnu screen
 
 # Plugin Description
 Suitable for:
+
     1. who uses LINUX(not sure about MAC)
     2. who uses vim
     3. who uses matlab
 
 The plugin will help you complete following functions:
+
     1. execute the matlab code you selected in vim
     2. execute the matlab script of vim's current buffer
     3. open vim buffer's file in matlab editor and begin to debug
