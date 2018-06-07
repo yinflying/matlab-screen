@@ -22,7 +22,8 @@ function! SetMatlabBreak()
     redraw!
 endfunction
 function! WatchMatlabVarible()
-    execute "silent !screen -S matlab -X stuff 'openvar ".expand("<cword>")."^M'"
+    let var_name = substitute(getline('.'),'^.*[a-zA-Z0-9._]\@<!\(\S*\%'.col('.').'c\k*\).*$','\1', '')
+    execute "silent !screen -S matlab -X stuff 'openvar ".var_name."^M'"
     redraw!
 endfunction
 function! OpenMatlabCurrentFile()
