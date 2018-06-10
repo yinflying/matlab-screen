@@ -71,7 +71,7 @@ nnoremap <Leader>mf  :call matlab#openCurrentFile()<CR>
 nnoremap <Leader>maf :call matlab#openAllFiles()<CR>
 nnoremap <Leader>mw  :call matlab#openWorkspace()<CR>
 nnoremap <Leader>mc  :call matlab#clearAllVaribles()<CR>
-nnoremap <Leader>ms  :call matlab#()<CR>
+nnoremap <Leader>ms  :call matlab#getVaribleSize()<CR>
 nnoremap <Leader>mu  :call matlab#update()<CR>
 
 nnoremap <Leader>mb  :call matlab#debug_setBreak()<CR>

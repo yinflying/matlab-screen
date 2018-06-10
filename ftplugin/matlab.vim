@@ -26,7 +26,7 @@ endfunction
 function! matlab#openVariable()
     let var_name = substitute(getline('.'),'^.*[a-zA-Z0-9._]\@<!\(\S*\%'.
                 \col('.').'c\k*\).*$','\1', '')
-    call s:matlab_job_start("dbclear ".var_name."^M")
+    call s:matlab_job_start("openvar ".var_name."^M")
 endfunction
 function! matlab#dispVariable()
     let var_name = substitute(getline('.'),'^.*[a-zA-Z0-9._]\@<!\(\S*\%'.
@@ -57,7 +57,7 @@ endfunction
 function! matlab#clearAllVaribles()
     call s:matlab_job_start("clear^M")
 endfunction
-function! GetMatlabVariableSize()
+function! matlab#getVaribleSize()
     let var_name = substitute(getline('.'),'^.*[a-zA-Z0-9._]\@<!\(\S*\%'.
                 \col('.').'c\k*\).*$','\1', '')
     call s:matlab_job_start("size(".var_name.")^M")
@@ -180,7 +180,7 @@ nnoremap <Leader>mf  :call matlab#openCurrentFile()<CR>
 nnoremap <Leader>maf :call matlab#openAllFiles()<CR>
 nnoremap <Leader>mw  :call matlab#openWorkspace()<CR>
 nnoremap <Leader>mc  :call matlab#clearAllVaribles()<CR>
-nnoremap <Leader>ms  :call matlab#()<CR>
+nnoremap <Leader>ms  :call matlab#getVaribleSize()<CR>
 nnoremap <Leader>mu  :call matlab#update()<CR>
 
 nnoremap <Leader>mb  :call matlab#debug_setBreak()<CR>
