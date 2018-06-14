@@ -57,6 +57,9 @@ endfunction
 function! matlab#clearAllVaribles()
     call s:matlab_job_start("clear^M")
 endfunction
+function! matlab#suspend()
+    call s:matlab_job_start("^c^M")
+endfunction
 function! matlab#getVaribleSize()
     let var_name = substitute(getline('.'),'^.*[a-zA-Z0-9._]\@<!\(\S*\%'.
                 \col('.').'c\k*\).*$','\1', '')
@@ -139,11 +142,15 @@ function! UpdateMatlabDebugLine_job(channel,msg)
         if s[0]=='dbstack'
             if bufnr(s[1]) > 0 && s[2] > 0
                 execute "sign place 10086 line=".s[2]." name=MatlabDebugLine file=".s[1]
+                execute "buffer ".s[1]
+                call cursor(s[2],1)
             elseif bufnr(s[1]) > 0 && s[2] < 0
                 execute "sign unplace 10086"
             else
                 execute "edit ".s[1]
                 execute "sign place 10086 line=".s[2]." name=MatlabDebugLine file=".s[1]
+                execute "buffer ".s[1]
+                call cursor(s[2],1)
             endif
         endif
     endfor
@@ -161,8 +168,6 @@ endif
 
 if !exists("*matlab#update")
 function! matlab#update()
-    let matlabcmd = "addpath('".$HOME."/.vim/plugged/matlab-screen/vim_matlab_script')^M"
-    call s:matlab_job_start(matlabcmd)
     call s:updateMatlabBreakInfo()
     call s:UpdateMatlabDebugLine()
 endfunction
@@ -180,13 +185,14 @@ nnoremap <Leader>mf  :call matlab#openCurrentFile()<CR>
 nnoremap <Leader>maf :call matlab#openAllFiles()<CR>
 nnoremap <Leader>mw  :call matlab#openWorkspace()<CR>
 nnoremap <Leader>mc  :call matlab#clearAllVaribles()<CR>
+nnoremap <Leader>mC  :call matlab#suspend()<CR>
 nnoremap <Leader>ms  :call matlab#getVaribleSize()<CR>
 nnoremap <Leader>mu  :call matlab#update()<CR>
 
 nnoremap <Leader>mb  :call matlab#debug_setBreak()<CR>
 nnoremap <Leader>mB  :call matlab#debug_clearAllBreaks()<CR>
-nnoremap <F5>  :call matlab#debug_continue()<CR>
-nnoremap <F9>  :call matlab#debug_step()<CR>
-nnoremap <F7>  :call matlab#debug_stepIn()<CR>
-nnoremap <F8>  :call matlab#debug_stepOut()<CR>
-nnoremap <F10> :call matlab#debug_quit()<CR>
+nnoremap <F5> :call matlab#debug_continue()<CR>
+nnoremap <F6> :call matlab#debug_step()<CR>
+nnoremap <F7> :call matlab#debug_stepIn()<CR>
+nnoremap <F8> :call matlab#debug_stepOut()<CR>
+nnoremap <F9> :call matlab#debug_quit()<CR>

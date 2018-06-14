@@ -23,41 +23,54 @@ The plugin will help you complete following functions:
     6. pass a set of command from vim to matlab directly(e.g. clear,workspace)
 
 # INSTALL
-As with all other vim plugin.
+1. As with all other vim plugin.
 
-However you should install another software `screen`, it could be found in all official repositories, just search and install it.
+2. INSTALL gnu `screen`
+It could be found in all official repositories, just search and install it.
 
 # Usage
 1. Open matlab in screen which session names `matlab` without desktop under terminal:
 ```bash
-$ screen -S matlab -m sh -c "<MATLAB>/bin/glnxa64/MATLAB -nosplash -nodesktop"
+$ screen -S matlab -m sh -c "export MATLABPATH=$HOME/.vim/.../vim_matlab_script;<MATLAB>/bin/glnxa64/MATLAB -nosplash -nodesktop"
 ```
+`$HOME/.vim/..../vim_matlab_script` is the full path of the matlab script folder `vim_matlab_script`;
+
 `<MATLAB>/bin/glnxa64/MATLAB` is the full path of the matlab executable binary file, just replace it with your matlab location.
 
 Note: In order to be more convenient, you could make a alias in your ~/.bashrc or ~/.zshrc,such as:
 ```bash
-alias smatlab='screen -S matlab -m sh -c "<MATLAB/bin/glnxa64/MATLAB -nosplash -nodesktop"'
+alias smatlab='screen -S matlab -m sh -c "export MATLABPATH=$HOME/.vim/.../vim_matlab_script;<MATLAB/bin/glnxa64/MATLAB -nosplash -nodesktop"'
 ```
 2. Open a matlab script file (*.m), and then type following shortcut:
     1. `<Leader>mr`           : (matlab run           ) execute current matlab script
     2. `Shift+v jj<Leader>mr` : (matlab run           ) execute current selected line
     3. `<Leader>md`           : (matlab doc           ) consult the function name under current cursor
     5. `<Leader>mv`           : (matlab variable      ) show variable under current cursor
-    6. `<Leader>mf`           : (matlab open file     ) open current buffer's file in matlab editor
-    7. `<Leader>maf`          : (matlab open all file ) open all buffers' file in matlab editor
-    8. `<Leader>mw`           : (matlab workspace     ) open matlab workspace
-    9. `<Leader>mc`           : (matlab clear         ) clear matlab all variables
-    10. `<Leader>ms`          : (matlab size          ) show variable size under current cursor
+    6. `<Leader>mV`           : (matlab variable      ) show variable under current cursor in terminal
+    7. `<Leader>mf`           : (matlab open file     ) open current buffer's file in matlab editor
+    8. `<Leader>maf`          : (matlab open all file ) open all buffers' file in matlab editor
+    9. `<Leader>mw`           : (matlab workspace     ) open matlab workspace
+    10. `<Leader>mc`          : (matlab clear         ) clear matlab all variables
+    11. `<Leader>mC`          : (matlab Cancel        ) Cancel matlab runing job
+    12. `<Leader>ms`          : (matlab size          ) show variable size under current cursor
 
 3. Debug Default ShortCut(See Default KeyMaps)
+    1. `<Leader>mu`  : update break point and running line
+    1. `<Leader>mb`  : set break point at current line
+    2. `<Leader>mB`  : clear all break point
+    3. `<F5>`  : continue
+    4. `<F6> ` : step
+    5. `<F7> ` : step in
+    6. `<F8>`  : step out
+    7. `<F9>`  : quit
+
+Debug hint may not work perfectly(It is more comfortable debug under matlab editor(use `<Leader>maf` shortcut));
 
 NOTE 1: `<Leader>` key can be set in `.vimrc` such as:
 ```vimscript
 let mapleader=";"
 ```
 NOTE 2: Don't use `matlab_tmp.m` as your matlab script name.
-
-NOTE 3: It is easy to add more shortcut
 
 # Default KeyMaps
 Here are the all Default KeyMaps:
@@ -71,16 +84,17 @@ nnoremap <Leader>mf  :call matlab#openCurrentFile()<CR>
 nnoremap <Leader>maf :call matlab#openAllFiles()<CR>
 nnoremap <Leader>mw  :call matlab#openWorkspace()<CR>
 nnoremap <Leader>mc  :call matlab#clearAllVaribles()<CR>
+nnoremap <Leader>mC  :call matlab#suspend()<CR>
 nnoremap <Leader>ms  :call matlab#getVaribleSize()<CR>
 nnoremap <Leader>mu  :call matlab#update()<CR>
 
 nnoremap <Leader>mb  :call matlab#debug_setBreak()<CR>
 nnoremap <Leader>mB  :call matlab#debug_clearAllBreaks()<CR>
 nnoremap <F5>  :call matlab#debug_continue()<CR>
-nnoremap <F9>  :call matlab#debug_step()<CR>
+nnoremap <F6>  :call matlab#debug_step()<CR>
 nnoremap <F7>  :call matlab#debug_stepIn()<CR>
 nnoremap <F8>  :call matlab#debug_stepOut()<CR>
-nnoremap <F10> :call matlab#debug_quit()<CR>
+nnoremap <F9>  :call matlab#debug_quit()<CR>
 ```
 # THANKS
 Inspired by [daeyun/vim-matlab](https://github.com/daeyun/vim-matlab) and vscode matlab plugin
