@@ -10,11 +10,13 @@ function! matlab#runSeleted() range
     execute "'<,'> write! ".expand('%:p:h')."/matlab_tmp.m"
     call job_start(["/bin/bash","-c","echo delete\\(\\'matlab_tmp.m\\'\\)\\; >> ".
                 \expand('%:p:h')."/matlab_tmp.m"],{'callback':'Handler'})
+    call job_start(["/bin/bash","-c","echo -n ".expand('%:p:h').">/tmp/vim_screen_pwd.tmp"])
     call job_start(["screen","-S","matlab","-X","stuff",
-                \"cd ".expand('%:p:h').";matlab_tmp^M"],{'callback':'Handler'})
+                \"cd(vim_matlab_getpwd());matlab_tmp^M"],{'callback':'Handler'})
 endfunction
 function! matlab#runCurrentFile()
-    let matlabcmd = 'cd '.expand('%:p:h').';'.
+    call job_start(["/bin/bash","-c","echo -n ".expand('%:p:h').">/tmp/vim_screen_pwd.tmp"])
+    let matlabcmd = 'cd(vim_matlab_getpwd());'.
                 \strpart(expand('%:t'),0,len(expand('%:t'))-2).'^M'
     call s:matlab_job_start(matlabcmd)
     call s:UpdateMatlabDebugLine()
