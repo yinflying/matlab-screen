@@ -36,22 +36,26 @@ function! matlab#dispVariable()
     call s:matlab_job_start("disp(".var_name.")^M")
 endfunction
 function! matlab#openCurrentFile()
-    call s:matlab_job_start("edit ".expand('%:p')."^M")
+    call job_start(["/bin/bash","-c","echo ".expand('%:p').">/tmp/vim_screen_pwd.tmp"])
+    call s:matlab_job_start("vim_matlab_edit^M")
 endfunction
 function! matlab#openAllFiles()
     let currentBuffer = 1
     let allFileStr = ''
+    call job_start(["/bin/bash","-c","echo -n >/tmp/vim_screen_pwd.tmp"])
     while currentBuffer <= bufnr('$')
         if bufexists(currentBuffer)
             if expand('#'.string(currentBuffer).':e') != 'm'
                 let currentBuffer = currentBuffer + 1
                 continue
             endif
-            let allFileStr = allFileStr .' '. expand('#'.string(currentBuffer).':p')
+            call job_start(["/bin/bash","-c","echo ".
+                        \expand('#'.string(currentBuffer).':p').
+                        \">>/tmp/vim_screen_pwd.tmp"])
         endif
         let currentBuffer = currentBuffer + 1
     endwhile
-    call s:matlab_job_start("edit ".allFileStr."^M")
+    call s:matlab_job_start("vim_matlab_edit^M")
 endfunction
 function! matlab#openWorkspace()
     call s:matlab_job_start("workspace^M")
@@ -179,22 +183,22 @@ sign define MatlabBreakPoint text=B- texthl=Search
 sign define MatlabDebugLine linehl=IncSearch
 
 vnoremap <Leader>mr  :call matlab#runSeleted()<CR>
-nnoremap <Leader>mr  :call matlab#runCurrentFile()<CR>
-nnoremap <Leader>md  :call matlab#getDoc()<CR>
-nnoremap <Leader>mv  :call matlab#openVariable()<CR>
-nnoremap <Leader>mV  :call matlab#dispVariable()<CR>
-nnoremap <Leader>mf  :call matlab#openCurrentFile()<CR>
-nnoremap <Leader>maf :call matlab#openAllFiles()<CR>
-nnoremap <Leader>mw  :call matlab#openWorkspace()<CR>
-nnoremap <Leader>mc  :call matlab#clearAllVaribles()<CR>
-nnoremap <Leader>mC  :call matlab#suspend()<CR>
-nnoremap <Leader>ms  :call matlab#getVaribleSize()<CR>
-nnoremap <Leader>mu  :call matlab#update()<CR>
+nnoremap <expr> <Leader>mr  matlab#runCurrentFile()
+nnoremap <expr> <Leader>md  matlab#getDoc()
+nnoremap <expr> <Leader>mv  matlab#openVariable()
+nnoremap <expr> <Leader>mV  matlab#dispVariable()
+nnoremap <expr> <Leader>mf  matlab#openCurrentFile()
+nnoremap <expr> <Leader>maf matlab#openAllFiles()
+nnoremap <expr> <Leader>mw  matlab#openWorkspace()
+nnoremap <expr> <Leader>mc  matlab#clearAllVaribles()
+nnoremap <expr> <Leader>mC  matlab#suspend()
+nnoremap <expr> <Leader>ms  matlab#getVaribleSize()
+nnoremap <expr> <Leader>mu  matlab#update()
 
-nnoremap <Leader>mb  :call matlab#debug_setBreak()<CR>
-nnoremap <Leader>mB  :call matlab#debug_clearAllBreaks()<CR>
-nnoremap <F5> :call matlab#debug_continue()<CR>
-nnoremap <F6> :call matlab#debug_step()<CR>
-nnoremap <F7> :call matlab#debug_stepIn()<CR>
-nnoremap <F8> :call matlab#debug_stepOut()<CR>
-nnoremap <F9> :call matlab#debug_quit()<CR>
+nnoremap <expr> <Leader>mb  matlab#debug_setBreak()
+nnoremap <expr> <Leader>mB  matlab#debug_clearAllBreaks()
+nnoremap <expr> <F5> matlab#debug_continue()
+nnoremap <expr> <F6> matlab#debug_step()
+nnoremap <expr> <F7> matlab#debug_stepIn()
+nnoremap <expr> <F8> matlab#debug_stepOut()
+nnoremap <expr> <F9> matlab#debug_quit()
