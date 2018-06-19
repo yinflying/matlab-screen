@@ -1,12 +1,14 @@
 # matlab-screen
 vim matlab plugin pass specified commands through gnu screen
 
+**If You are vim8 user, Please Use vim8 branch**
+
 # Plugin Description
 Suitable for:
 
     1. who uses LINUX(not sure about MAC)
     2. who uses vim
-    3. who uses matlab
+    3. who uses matlab with option '-nodesktop'
 
 The plugin will help you complete following functions:
 
