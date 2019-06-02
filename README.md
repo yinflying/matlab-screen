@@ -14,11 +14,11 @@ smoothly by using vim shortcut. Here are main feathers in current version:
 # CONFIGURATION
 
 1.  the matlab run command(must be defined)
-
+    ```
     let g:matlab_term_cmd='matlab -nodesktop'
-
+    ```
 1. default shortcut & Function
-
+    ```
     vnoremap <Leader>mr  :call matlab#RunSelected()<CR>
     nnoremap <Leader>mr  :call matlab#RunCell()<CR>
     nnoremap <Leader>mR  :call matlab#RunCurrentFile()<CR>
@@ -31,51 +31,53 @@ smoothly by using vim shortcut. Here are main feathers in current version:
     nnoremap <Leader>mc  :call matlab#ClearVariables()<CR>
     nnoremap <Leader>ms  :call matlab#GetVariableSize()<CR>
     nnoremap <Leader>mt  :call matlab#Toggle()<CR>
-
+    ```
 1. highlight cell line (start with '%%')
-  
+    ```
     let g:matlab_screen_highlight_cell = 1
 
+    ```
 # FUNCTION
 
-*matlab#RunSeletected()*
-    Run selected line under visual mode in matlab
+* matlab#RunSeletected()
+     Run selected line under visual mode in matlab
     
-*matlab#RunCell()*
+* matlab#RunCell()
     Run lines between '%% ... %%' in matlab
 
-*matlab#RunCurrentFile()*
+* matlab#RunCurrentFile()
     Run current matlab scripts in matlab
 
-*matlab#GetDoc()*
+* matlab#GetDoc()
     Refer keyword under current cursor in matlab
 
-*matlab#SetBreak()*
+* matlab#SetBreak()
     Set a breakpoint at current line
 
-*matlab#WatchVariable()*
+* matlab#WatchVariable()
     Open Variables under current cursor(Support struct)
 
-*matlab#OpenCurrentFile()*
+* matlab#OpenCurrentFile()
     Open current file under matlab file editor
 
-*matlab#OpenAllFile()*
+* matlab#OpenAllFile()
     Open all File in current buffer under matlab file editor
 
-*matlab#OpenWorkspace()*
+* matlab#OpenWorkspace()
     Open matlab workspace
 
-*matlab#ClearVariabels()*
+* matlab#ClearVariabels()
     Clear matlab all variables
 
-*matlab#GetVariableSize()*
+* matlab#GetVariableSize()
     show size of keyword (variables) under curent cursor
 
-*matlab#Toggle()*
+* matlab#Toggle()
     Open/Close matlab in vim terminal
 
-*matlab#Start()*
+* matlab#Start()
     Open matlab in vim terminal(Only one process should exist)
 
-*matlab#Close()*
+* matlab#Close()
     Close matlab in vim terminal
+
