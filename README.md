@@ -1,7 +1,7 @@
-*matlab-screen.txt*        For Vim version 8.1         Last change: 2019 May 20
-*matlab-screen.txt*        matlab terminal support wit vim
-==============================================================================
-INTRODUCTION                                           *matlab-screen-intro*
+# matlab-screen
+*For Vim version 8.1* matlab terminal support wit vim
+
+# INTRODUCTION
 
 matlab-screen is a plugin to pass commands to matlab, to make it work more
 smoothly by using vim shortcut. Here are main feathers in current version:
@@ -11,13 +11,14 @@ smoothly by using vim shortcut. Here are main feathers in current version:
     3. Consult matlab doc/variable under current cursor directly
     4. Some pass some useful command to matlab.
 
-==============================================================================
-CONFIGURATION                                   *matlab-screen-configuration*
+# CONFIGURATION
 
-* the matlab run command(must be defined) >
+1.  the matlab run command(must be defined)
+
     let g:matlab_term_cmd='matlab -nodesktop'
-<
-* default shortcut & Function >
+
+1. default shortcut & Function
+
     vnoremap <Leader>mr  :call matlab#RunSelected()<CR>
     nnoremap <Leader>mr  :call matlab#RunCell()<CR>
     nnoremap <Leader>mR  :call matlab#RunCurrentFile()<CR>
@@ -30,12 +31,12 @@ CONFIGURATION                                   *matlab-screen-configuration*
     nnoremap <Leader>mc  :call matlab#ClearVariables()<CR>
     nnoremap <Leader>ms  :call matlab#GetVariableSize()<CR>
     nnoremap <Leader>mt  :call matlab#Toggle()<CR>
-<
-* highlight cell line (start with '%%') >
+
+1. highlight cell line (start with '%%')
+  
     let g:matlab_screen_highlight_cell = 1
-<
-==============================================================================
-FUNCTION                                             *matlab-screen-function*
+
+# FUNCTION
 
 *matlab#RunSeletected()*
     Run selected line under visual mode in matlab
@@ -78,10 +79,3 @@ FUNCTION                                             *matlab-screen-function*
 
 *matlab#Close()*
     Close matlab in vim terminal
-
-==============================================================================
-LICENSE                                                       *matlab-screen*
-
-*GPL*
-
- vim:tw=78:ts=8:ft=help:norl:
