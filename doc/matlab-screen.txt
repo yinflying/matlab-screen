@@ -86,7 +86,7 @@ FUNCTION                                             *matlab-screen-function*
     Close matlab in vim terminal
 
 ==============================================================================
-LICENSE                                                       *matlab-screen*
+LICENSE                                                  *matlab-screen-lic*
 
 *GPL*
 
