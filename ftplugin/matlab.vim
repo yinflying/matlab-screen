@@ -1,11 +1,14 @@
 function matlab#Start()
+    if !exists('g:matlab_screen_terminal_height')
+        let g:matlab_screen_terminal_height = 10
+    endif
     if exists('s:matlab_buf')
         echom "Only one MATLAB process in current vim!"
         return
     endif
     rightbelow let s:matlab_buf =
     \term_start(g:matlab_term_cmd,
-    \{"term_finish" : "close", "term_rows": 10, "norestore" : 1 })
+    \{"term_finish" : "close", "term_rows": g:matlab_screen_terminal_height, "norestore" : 1 })
     wincmd p
 endfunction
 
@@ -104,15 +107,17 @@ endfunction
 au vimEnter * call matlab#HighlightCell()
 
 " Shortcut
-vnoremap <Leader>mr  :call matlab#RunSelected()<CR>
-nnoremap <Leader>mr  :call matlab#RunCell()<CR>
-nnoremap <Leader>mR  :call matlab#RunCurrentFile()<CR>
-nnoremap <Leader>md  :call matlab#GetDoc()<CR>
-nnoremap <Leader>mb  :call matlab#SetBreak()<CR>
-nnoremap <Leader>mv  :call matlab#WatchVarible()<CR>
-nnoremap <Leader>mf  :call matlab#OpenCurrentFile()<CR>
-nnoremap <Leader>maf :call matlab#OpenAllFile()<CR>
-nnoremap <Leader>mw  :call matlab#OpenWorkspace()<CR>
-nnoremap <Leader>mc  :call matlab#ClearVariables()<CR>
-nnoremap <Leader>ms  :call matlab#GetVariableSize()<CR>
-nnoremap <Leader>mt  :call matlab#Toggle()<CR>
+if !exists('g:matlab_screen_default_mapping') || g:matlab_screen_default_mapping == 1
+    vnoremap <Leader>mr  :call matlab#RunSelected()<CR>
+    nnoremap <Leader>mr  :call matlab#RunCell()<CR>
+    nnoremap <Leader>mR  :call matlab#RunCurrentFile()<CR>
+    nnoremap <Leader>md  :call matlab#GetDoc()<CR>
+    nnoremap <Leader>mb  :call matlab#SetBreak()<CR>
+    nnoremap <Leader>mv  :call matlab#WatchVarible()<CR>
+    nnoremap <Leader>mf  :call matlab#OpenCurrentFile()<CR>
+    nnoremap <Leader>maf :call matlab#OpenAllFile()<CR>
+    nnoremap <Leader>mw  :call matlab#OpenWorkspace()<CR>
+    nnoremap <Leader>mc  :call matlab#ClearVariables()<CR>
+    nnoremap <Leader>ms  :call matlab#GetVariableSize()<CR>
+    nnoremap <Leader>mt  :call matlab#Toggle()<CR>
+endif

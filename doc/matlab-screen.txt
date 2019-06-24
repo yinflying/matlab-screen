@@ -9,14 +9,20 @@ smoothly by using vim shortcut. Here are main feathers in current version:
     1. Open and Close Matlab under vim 8.1 built-in terminal
     2. Run selected text / Run Matlab cell / Run current file directly
     3. Consult matlab doc/variable under current cursor directly
-    4. Some pass some useful command to matlab.
+    4. Some pass some useful commands to matlab.
 
 ==============================================================================
 CONFIGURATION                                   *matlab-screen-configuration*
 
 * the matlab run command(must be defined) >
     let g:matlab_term_cmd='matlab -nodesktop'
-<
+
+* enable/disable shortcut(mapping), default: 1 >
+    let g:matlab_screen_default_mapping == 1
+
+* matlab terminal height, default: 10 >
+    let g:matlab_screen_terminal_height = 10
+
 * default shortcut & Function >
     vnoremap <Leader>mr  :call matlab#RunSelected()<CR>
     nnoremap <Leader>mr  :call matlab#RunCell()<CR>
@@ -39,7 +45,7 @@ FUNCTION                                             *matlab-screen-function*
 
 *matlab#RunSeletected()*
     Run selected line under visual mode in matlab
-    
+
 *matlab#RunCell()*
     Run lines between '%% ... %%' in matlab
 
