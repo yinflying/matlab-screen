@@ -6,9 +6,15 @@ function matlab#Start()
         echom "Only one MATLAB process in current vim!"
         return
     endif
-    rightbelow let s:matlab_buf =
-    \term_start(g:matlab_term_cmd,
-    \{"term_finish" : "close", "term_rows": g:matlab_screen_terminal_height, "norestore" : 1 })
+    if exists('g:matlab_screen_vertical_terminal') && g:matlab_screen_vertical_terminal ==  1
+        rightbelow let s:matlab_buf =
+        \term_start(g:matlab_term_cmd,
+        \{"term_finish" : "close", "vertical" : 1, "norestore" : 1 })
+    else
+       rightbelow let s:matlab_buf =
+       \term_start(g:matlab_term_cmd,
+       \{"term_finish" : "close", "term_rows": g:matlab_screen_terminal_height, "norestore" : 1 })
+    endif
     wincmd p
 endfunction
 
