@@ -23,6 +23,10 @@ CONFIGURATION                                   *matlab-screen-configuration*
 * matlab terminal height, default: 10 >
     let g:matlab_screen_terminal_height = 10
 
+* the matlab terminal is split vertically and runs on the right.
+  In this case, the panes are of equal size. default: 0 >
+    let g:matlab_screen_vertical_terminal = 1
+
 * default shortcut & Function >
     vnoremap <Leader>mr  :call matlab#RunSelected()<CR>
     nnoremap <Leader>mr  :call matlab#RunCell()<CR>
